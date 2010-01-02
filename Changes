@@ -2,6 +2,10 @@
 	* Palm/Datebook.pm: add support for the newer-format Palm Calendar
 	databases.
 
+1.11_01 - Sat Jan  2 12:16:38 2010
+	Tim Adye <T.J.Adye@rl.ac.uk>: Palm/Datebook.pm: add support
+	for time zone entries.
+
 1.009 - 2007-07-30 brian d foy <bdfoy@cpan.org>
 	* cleaned up the pod coverage test.
 	* add License and Author stuff to the distro
