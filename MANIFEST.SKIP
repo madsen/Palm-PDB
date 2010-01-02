@@ -15,3 +15,5 @@ t/Test.pdb
 t/cover_db*
 ^cover_db\b
 p5-.*
+.git/
+.gitignore
