@@ -102,11 +102,11 @@ An integer which specifies the type of repeat:
 
 no repeat.
 
-=item 1
+=item 1Z<>
 
 a daily event, one that occurs every day.
 
-=item 2
+=item 2Z<>
 
 a weekly event, one that occurs every week on the same dayZ<>(s). An
 event may occur on several days every week, I<e.g.>, every Monday,
@@ -125,7 +125,7 @@ Monday, and so forth.
 Day the week starts on (0 for Sunday, 1 for Monday). This affects
 the phase of events that repeat every 2nd (or more) Sunday.
 
-=item 3
+=item 3Z<>
 
 a "monthly by day" event, I<e.g.>, one that occurs on the second
 Friday of every month.
@@ -144,12 +144,12 @@ month.
 An integer, the day of the week on which the event occurs. 0 means
 Sunday, 1 means Monday, and so forth.
 
-=item 4
+=item 4Z<>
 
 a "monthly by date" event, I<e.g.>, one that occurs on the 12th of
 every month.
 
-=item 5
+=item 5Z<>
 
 a yearly event, I<e.g.>, one that occurs every year on December 25th.
 
