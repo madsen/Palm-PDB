@@ -4,31 +4,43 @@ require 5.006;
 
 eval "use Test::Manifest 1.21";
 
-my @classes = qw( 
-	Address Datebook DateTime Mail 
-	Memo PDB Raw StdAppInfo ToDo 
-	ZirePhoto
-	);
+$|++;
+foreach ( 1 .. 4 ) {
+	sleep 1;
+	print "\a"; # annoying bell
+	}
+
+print STDERR <<"HERE";
+====================================================================
+--------------------------------------------------------------------
+
+The Palm modules are unmaintained. If you want to use them, perhaps
+you can take over its maintenance! Write to modules@perl.org to ask
+to take over the module.
+
+--------------------------------------------------------------------
+====================================================================
+HERE
 
 WriteMakefile(
     'NAME'			=> 'Palm',
 	'ABSTRACT'		=> 'Module for handling PalmOS databases',
     'VERSION_FROM'  => 'lib/Palm.pm',
     'LICENSE'       => 'perl',
-    'DISTNAME'		=> 'p5-Palm',	# More descriptive than just "Palm"
 	'AUTHOR'        => 'brian d foy <bdfoy@cpan.org>',
 	
 	'PREREQ_PM'		=> {
 		'Test::More'	=> '0',
 		},
 
-	'PM'           => {
-		'lib/Palm.pm' => '$(INST_LIBDIR)/Palm.pm',
-		map { ( "lib/$_.pm", "\$(INST_LIBDIR)/Palm/$_.pm" ) } @classes
+	'META_MERGE'	=> {
+		resources => {
+			repository => 'https://github.com/briandfoy/p5-Palm',
+			},
 		},
 
     'EXE_FILES'		=> [ 'examples/pdbdump' ],
 
-	clean  => { FILES    => q|*.bak p5-*| },
+	clean  => { FILES    => q|*.bak *gz| },
 
 );
