@@ -12,7 +12,7 @@ package Palm;
 use vars qw( $VERSION );
 
 # One liner, to allow MakeMaker to work.
-$VERSION = '1.012';
+$VERSION = '1.013';
 
 =head1 NAME
 
@@ -84,8 +84,15 @@ The source is in Github:
 
 Alessandro Zummo, C<< <a.zummo@towertech.it> >>
 
-Currently maintained by brian d foy, C<< <bdfoy@cpan.org> >>
+brian d foy, C<< <bdfoy@cpan.org> >> maintained the module for awhile.
+
+This module is currently unmaintained. You could take it over by
+writing to C<< <modules@perl.org> >>.
 
 =head1 SEE ALSO
 
 Palm::PDB(3)
+
+=cut
+
+1;

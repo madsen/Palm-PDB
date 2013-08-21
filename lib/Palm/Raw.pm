@@ -18,7 +18,7 @@ use Palm::PDB;
 use vars qw( $VERSION @ISA );
 
 # One liner, to allow MakeMaker to work.
-$VERSION = '1.012';
+$VERSION = '1.013';
 
 @ISA = qw( Palm::PDB );
 

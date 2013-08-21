@@ -22,7 +22,7 @@ use POSIX;
 use vars qw($VERSION);
 
 # One liner, to allow MakeMaker to work.
-$VERSION = '1.012';
+$VERSION = '1.013';
 
 @Palm::DateTime::ISA = qw( Exporter );
 
