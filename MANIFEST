@@ -17,8 +17,7 @@ lib/Palm/ZirePhoto.pm
 LICENSE
 Makefile.PL
 MANIFEST
-MYMETA.json
-MYMETA.yml
+MANIFEST.SKIP
 README
 t/address.t
 t/AddressDB.pdb
@@ -36,6 +35,7 @@ t/MemoDB.pdb
 t/mkpdbname.t
 t/pod.t
 t/pod_coverage.t
+t/Test.pdb
 t/test_manifest
 t/todo.t
 t/ToDoDB.pdb

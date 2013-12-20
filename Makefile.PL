@@ -42,5 +42,4 @@ WriteMakefile(
     'EXE_FILES'		=> [ 'examples/pdbdump' ],
 
 	clean  => { FILES    => q|*.bak *gz| },
-
 );
