@@ -71,7 +71,7 @@ created (C<time2>).
 
 =head2 Photo Databases
 
-Actual photos are stored in separate databases. Each record is preceeded by an 8 byte
+Actual photos are stored in separate databases. Each record is preceded by an 8 byte
 header that describes it a) as a data block (B<DBLK>) and b) the size of the block.
 Records are generally 4k, except for the last. To convert a Photo database to a JPEG
 image, one would do something like:
