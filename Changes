@@ -5,6 +5,7 @@
 	  the other Palm modules
 	- With permission from Andrew Arensburger & Alessandro Zummo
 	  Palm-PDB is now distributed under the same terms as Perl 5
+	- Constant variables in Palm::PDB are now proper constants
 
 1.013   2013-08-21  Release by brian d foy <bdfoy@cpan.org>
 

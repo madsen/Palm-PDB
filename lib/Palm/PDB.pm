@@ -71,23 +71,21 @@ individual chunks, then writes them to a file.
 
 =cut
 
-use constant dmRecordIDReservedRange => 1;
-					# The range of upper bits in the database's
+use constant {
+  dmRecordIDReservedRange => 1,		# The range of upper bits in the database's
 					# uniqueIDSeed from 0 to this number are
 					# reserved and not randomly picked when a
 					#database is created.
 
-my $EPOCH_1904 = 2082844800;		# Difference between Palm's
+  EPOCH_1904 => 2082844800,		# Difference between Palm's
 					# epoch (Jan. 1, 1904) and
 					# Unix's epoch (Jan. 1, 1970),
 					# in seconds.
-my $HeaderLen = 32+2+2+(9*4);		# Size of database header
-my $RecIndexHeaderLen = 6;		# Size of record index header
-my $IndexRecLen = 8;			# Length of record index entry
-my $IndexRsrcLen = 10;			# Length of resource index entry
-
-# XXX Should we 'use constant' for the above vars?
-
+  HeaderLen => 32+2+2+(9*4),		# Size of database header
+  RecIndexHeaderLen => 6,		# Size of record index header
+  IndexRecLen => 8,			# Length of record index entry
+  IndexRsrcLen => 10,			# Length of resource index entry
+};
 
 %PDBHandlers = ();			# Record handler map
 %PRCHandlers = ();			# Resource handler map
@@ -118,7 +116,7 @@ sub new
 
 	$self->{'ctime'} 	= $params->{'ctime'}		|| $now;
 	$self->{'mtime'} 	= $params->{'mtime'}		|| $now;
-	$self->{'baktime'} 	= $params->{'baktime'}		|| -$EPOCH_1904;
+	$self->{'baktime'} 	= $params->{'baktime'}		|| -(EPOCH_1904);
 
 	$self->{'modnum'}	= $params->{'modnum'}		|| 0;
 	$self->{'type'}		= $params->{'type'}		|| "\0\0\0\0";
@@ -527,7 +525,7 @@ sub Load
 	my $creator;
 	my $uniqueIDseed;
 
-	read $handle, $buf, $HeaderLen;	# Read the PDB header
+	read $handle, $buf, HeaderLen;	# Read the PDB header
 
 	# Split header into its component fields
 	($name, $attributes, $version, $ctime, $mtime, $baktime,
@@ -566,9 +564,9 @@ sub Load
 
 
 	$self->{version} = $version;
-	$self->{ctime} = $ctime - $EPOCH_1904;
-	$self->{mtime} = $mtime - $EPOCH_1904;
-	$self->{baktime} = $baktime - $EPOCH_1904;
+	$self->{ctime} = $ctime - EPOCH_1904;
+	$self->{mtime} = $mtime - EPOCH_1904;
+	$self->{baktime} = $baktime - EPOCH_1904;
 	$self->{modnum} = $modnum;
 	# _appinfo_offset and _sort_offset are private fields
 	$self->{_appinfo_offset} = $appinfo_offset;
@@ -625,7 +623,7 @@ sub Load
 
 	## Read record/resource index
 	# Read index header
-	read $handle, $buf, $RecIndexHeaderLen;
+	read $handle, $buf, RecIndexHeaderLen;
 
 	my $next_index;
 	my $numrecs;
@@ -703,7 +701,7 @@ sub _load_rec_index
 		my $id;			# Numerical ID
 		my $entry = {};		# Parsed index entry
 
-		read $fh, $buf, $IndexRecLen;
+		read $fh, $buf, IndexRecLen;
 
 		# The ID field is a bit weird: it's represented as 3
 		# bytes, but it's really a double word (long) value.
@@ -773,7 +771,7 @@ sub _load_rsrc_index
 		my $offset;
 		my $entry = {};		# Parsed index entry
 
-		read $fh, $buf, $IndexRsrcLen;
+		read $fh, $buf, IndexRsrcLen;
 
 		($type, $id, $offset) = unpack "a4 n N", $buf;
 
@@ -1107,8 +1105,8 @@ sub Write
 			push @record_data, [ $type, $id, $data ];
 		}
 		# Figure out size of index
-		$index_len = $RecIndexHeaderLen +
-			($#record_data + 1) * $IndexRsrcLen;
+		$index_len = RecIndexHeaderLen +
+			($#record_data + 1) * IndexRsrcLen;
 	} else {
 		my $record;
 
@@ -1153,8 +1151,8 @@ sub Write
 			push @record_data, [ $attributes, $id, $data ];
 		}
 		# Figure out size of index
-		$index_len = $RecIndexHeaderLen +
-			($#record_data + 1) * $IndexRecLen;
+		$index_len = RecIndexHeaderLen +
+			($#record_data + 1) * IndexRecLen;
 	}
 
 	my $header;
@@ -1194,7 +1192,7 @@ sub Write
 		$appinfo_offset = 0;
 	} else {
 		# Offset of AppInfo block from start of file
-		$appinfo_offset = $HeaderLen + $index_len + 2;
+		$appinfo_offset = HeaderLen + $index_len + 2;
 	}
 
 	# Calculate sort block offset
@@ -1207,7 +1205,7 @@ sub Write
 		if ($appinfo_offset == 0)
 		{
 			# ...from start of file
-			$sort_offset = $HeaderLen + $index_len + 2;
+			$sort_offset = HeaderLen + $index_len + 2;
 		} else {
 			# ...or just from start of AppInfo block
 			$sort_offset = $appinfo_offset +
@@ -1220,9 +1218,9 @@ sub Write
 		$self->{name},
 		$attributes,
 		$self->{version},
-		$self->{ctime} + $EPOCH_1904,
-		$self->{mtime} + $EPOCH_1904,
-		$self->{baktime} + $EPOCH_1904,
+		$self->{ctime} + EPOCH_1904,
+		$self->{mtime} + EPOCH_1904,
+		$self->{baktime} + EPOCH_1904,
 		$self->{modnum},
 		$appinfo_offset,
 		$sort_offset,
@@ -1250,7 +1248,7 @@ sub Write
 	{
 		$rec_offset = $appinfo_offset + length($appinfo_block);
 	} else {
-		$rec_offset = $HeaderLen + $index_len + 2;
+		$rec_offset = HeaderLen + $index_len + 2;
 	}
 
 	if ($self->{attributes}{resource} || $self->{'attributes'}{'ResDB'})
