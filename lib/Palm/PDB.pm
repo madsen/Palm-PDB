@@ -1,11 +1,17 @@
-# PDB.pm
+package Palm::PDB;
 #
 # Perl module for reading and writing Palm databases (both PDB and PRC).
 #
 #	Copyright (C) 1999, 2000, Andrew Arensburger.
-#	You may distribute this file under the terms of the Artistic
-#	License, as specified in the README file.
-
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the same terms as Perl itself.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See either the
+# GNU General Public License or the Artistic License for more details.
+#
 # A Palm database file (either .pdb or .prc) has the following overall
 # structure:
 #	Header
@@ -19,15 +25,13 @@
 # for details.
 
 use strict;
-package Palm::PDB;
 use vars qw( $VERSION %PDBHandlers %PRCHandlers );
 
 # One liner, to allow MakeMaker to work.
-$VERSION = '1.013';
+$VERSION = '1.014';
+# This file is part of {{$dist}} {{$dist_version}} ({{$date}})
 
-=head1 NAME
-
-Palm::PDB - Parse Palm database files.
+# ABSTRACT: Parse Palm database files
 
 =head1 SYNOPSIS
 
@@ -427,13 +431,13 @@ method.
 The sort block, as returned by the $pdb->ParseSortBlock() helper
 method.
 
-=item @{$pdb-E<gt>{Z<>"records"Z<>}}
+=item @{$pdb->{"records"}Z<>}
 
 The list of records in the database, as returned by the
 $pdb->ParseRecord() helper method. Resource databases do not have
 this.
 
-=item @{$pdb-E<gt>{Z<>"resources"Z<>}}
+=item @{$pdb->{"resources"}Z<>}
 
 The list of resources in the database, as returned by the
 $pdb->ParseResource() helper method. Record databases do not have
@@ -454,13 +458,13 @@ format given above.
 sub _open
 {
 	my($self, $mode, $fname) = @_;
-	
+
 	my $handle;
-	
+
 	if (ref($fname))
 	{
 		# Already a filehandle
-		if (ref($fname) eq 'GLOB' 
+		if (ref($fname) eq 'GLOB'
 		    or UNIVERSAL::isa($fname,"IO::Seekable"))
 		{
 			$handle = $fname;
@@ -485,7 +489,7 @@ sub _open
 	{
 		# Before 5.6.0 "autovivified file handles" don't exist
 		eval 'use IO::File; $handle = new IO::File' if $] < 5.006;
-		open $handle, "$mode $fname" 
+		open $handle, "$mode $fname"
 		    or die "Can't open \"$fname\": $!\n";
 	}
 
@@ -546,19 +550,19 @@ sub Load
 
 	# Attribute names as of PalmOS 5.0 ( see /Core/System/DataMgr.h )
 
-	$self->{'attributes'}{'ResDB'}			= 1 if $attributes & 0x0001; 
-	$self->{'attributes'}{'ReadOnly'}		= 1 if $attributes & 0x0002; 
-	$self->{'attributes'}{'AppInfoDirty'}		= 1 if $attributes & 0x0004; 
-	$self->{'attributes'}{'Backup'}			= 1 if $attributes & 0x0008; 
-	$self->{'attributes'}{'OKToInstallNewer'}	= 1 if $attributes & 0x0010; 
-	$self->{'attributes'}{'ResetAfterInstall'}	= 1 if $attributes & 0x0020; 
-	$self->{'attributes'}{'CopyPrevention'}		= 1 if $attributes & 0x0040; 
-	$self->{'attributes'}{'Stream'}			= 1 if $attributes & 0x0080; 
-	$self->{'attributes'}{'Hidden'}			= 1 if $attributes & 0x0100; 
-	$self->{'attributes'}{'LaunchableData'}		= 1 if $attributes & 0x0200; 
-	$self->{'attributes'}{'Recyclable'}		= 1 if $attributes & 0x0400; 
-	$self->{'attributes'}{'Bundle'}			= 1 if $attributes & 0x0800; 
-	$self->{'attributes'}{'Open'}			= 1 if $attributes & 0x8000; 
+	$self->{'attributes'}{'ResDB'}			= 1 if $attributes & 0x0001;
+	$self->{'attributes'}{'ReadOnly'}		= 1 if $attributes & 0x0002;
+	$self->{'attributes'}{'AppInfoDirty'}		= 1 if $attributes & 0x0004;
+	$self->{'attributes'}{'Backup'}			= 1 if $attributes & 0x0008;
+	$self->{'attributes'}{'OKToInstallNewer'}	= 1 if $attributes & 0x0010;
+	$self->{'attributes'}{'ResetAfterInstall'}	= 1 if $attributes & 0x0020;
+	$self->{'attributes'}{'CopyPrevention'}		= 1 if $attributes & 0x0040;
+	$self->{'attributes'}{'Stream'}			= 1 if $attributes & 0x0080;
+	$self->{'attributes'}{'Hidden'}			= 1 if $attributes & 0x0100;
+	$self->{'attributes'}{'LaunchableData'}		= 1 if $attributes & 0x0200;
+	$self->{'attributes'}{'Recyclable'}		= 1 if $attributes & 0x0400;
+	$self->{'attributes'}{'Bundle'}			= 1 if $attributes & 0x0800;
+	$self->{'attributes'}{'Open'}			= 1 if $attributes & 0x8000;
 
 
 	$self->{version} = $version;
@@ -914,7 +918,7 @@ sub _load_records
 				" but it's at ",
 				sprintf("[0x%08x]", tell($fh)), "\n";
 		}
-		
+
 		if( $pdb->{_index}[$i]{offset} > $pdb->{_size} ) {
 			die "corruption: Record $i beyond end of database!";
 		}
@@ -1180,7 +1184,7 @@ sub Write
 	$attributes |= 0x0200 if $self->{'attributes'}{'LaunchableData'};
 	$attributes |= 0x0400 if $self->{'attributes'}{'Recyclable'};
 	$attributes |= 0x0800 if $self->{'attributes'}{'Bundle'};
-	$attributes |= 0x8000 if $self->{'attributes'}{'Open'};	
+	$attributes |= 0x8000 if $self->{'attributes'}{'Open'};
 
 
 	# Calculate AppInfo block offset
@@ -1432,7 +1436,7 @@ If called without any arguments, creates a new record with
 L<new_Record()|/new_Record>, and appends it to $pdb.
 
 If given a reference to a record, appends that record to
-@{$pdb->{records}}.
+@{$pdb->{records}Z<>}.
 
 Returns a reference to the newly-appended record.
 
@@ -1540,7 +1544,7 @@ If called without any arguments, creates a new resource with
 L<new_Resource()|/new_Resource>, and appends it to $pdb.
 
 If given a reference to a resource, appends that resource to
-@{$pdb->{resources}}.
+@{$pdb->{resources}Z<>}.
 
 Returns a reference to the newly-appended resource.
 
@@ -1656,7 +1660,7 @@ sub delete_Record
 
 =head2 remove_Record
 
-	for (@{$pdb->{'records'}})
+	for (@{$pdb->{'records'}Z<>})
 	{
 		$pdb->remove_Record( $_ ) if $_->{attributes}{deleted};
 	}
@@ -1778,7 +1782,7 @@ representation of the record, typically as a reference to a record
 object or anonymous hash.
 
 The output from ParseRecord() will be appended to
-@{$pdb->{records}}. The records appear in this list in the
+@{$pdb->{records}Z<>}. The records appear in this list in the
 same order as they appear in the file.
 
 $offset argument is not normally useful, but is included for
@@ -1829,7 +1833,7 @@ representation of the resource, typically as a reference to a resource
 object or anonymous hash.
 
 The output from ParseResource() will be appended to
-@{$pdb->{resources}}. The resources appear in this list in
+@{$pdb->{resources}Z<>}. The resources appear in this list in
 the same order as they appear in the file.
 
 $type is a four-character string giving the resource's type.
@@ -1849,7 +1853,7 @@ be written to the database file.
 
 PackResource() is never called when writing a record database.
 
-=head1 BUGS
+=head1 BUGS AND LIMITATIONS
 
 These functions die too easily. They should return an error code.
 
@@ -1859,29 +1863,29 @@ It may be possible to parse sort blocks further.
 
 =head1 SOURCE CONTROL
 
-The source is in Github:
+The source is in GitHub:
 
-	http://github.com/briandfoy/p5-Palm/tree/master
-	
+	{{ $meta{resources}{repository}{web} }}
+
 =head1 AUTHOR
 
 Alessandro Zummo, C<< <a.zummo@towertech.it> >>
 
-Currently maintained by brian d foy, C<< <bdfoy@cpan.org> >>
+Currently maintained by Christopher J. Madsen, C<< <perl@cjmweb.net> >>
 
 =head1 SEE ALSO
 
-Palm::Raw(3)
+L<Palm::Raw>
 
-Palm::Address(3)
+L<Palm::Address>
 
-Palm::Datebook(3)
+L<Palm::Datebook>
 
-Palm::Mail(3)
+L<Palm::Mail>
 
-Palm::Memo(3)
+L<Palm::Memo>
 
-Palm::ToDo(3)
+L<Palm::ToDo>
 
 F<Palm Database Files>, in the ColdSync distribution.
 

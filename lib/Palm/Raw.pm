@@ -1,5 +1,5 @@
-# Palm::Raw.pm
-# 
+package Palm::Raw;
+#
 # Perl class for dealing with "raw" PDB databases. A "raw" database is
 # one where the AppInfo and sort blocks, and all of the
 # records/resources, are just strings of bytes.
@@ -9,22 +9,26 @@
 # you don't care about every type of thing in a database.
 #
 #	Copyright (C) 1999, 2000, Andrew Arensburger.
-#	You may distribute this file under the terms of the Artistic
-#	License, as specified in the README file.
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the same terms as Perl itself.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See either the
+# GNU General Public License or the Artistic License for more details.
 
 use strict;
-package Palm::Raw;
 use Palm::PDB;
 use vars qw( $VERSION @ISA );
 
 # One liner, to allow MakeMaker to work.
-$VERSION = '1.013';
+$VERSION = '1.014';
+# This file is part of {{$dist}} {{$dist_version}} ({{$date}})
 
 @ISA = qw( Palm::PDB );
 
-=head1 NAME
-
-Palm::Raw - Handler for "raw" Palm databases.
+# ABSTRACT: Handler for "raw" Palm databases
 
 =head1 SYNOPSIS
 
@@ -83,7 +87,7 @@ This is a scalar, the raw data of the sort block.
 
 =head2 Records
 
-    @{$pdb->{records}};
+    @{$pdb->{records}Z<>};
 
 Each element in the "records" array is a reference-to-hash. In
 addition to the standard keys ("attributes", "category", and "id"),
@@ -92,7 +96,7 @@ record data.
 
 =head2 Resources
 
-    @{$pdb->{resources}};
+    @{$pdb->{resources}Z<>};
 
 Each element in the "resources" array is a reference-to-hash. In
 addition to the standard keys ("type" and "id"), it contains the key
@@ -180,18 +184,18 @@ __END__
 
 =head1 SOURCE CONTROL
 
-The source is in Github:
+The source is in GitHub:
 
-	http://github.com/briandfoy/p5-Palm/tree/master
-	
+	{{ $meta{resources}{repository}{web} }}
+
 =head1 AUTHOR
 
 Alessandro Zummo, C<< <a.zummo@towertech.it> >>
 
-Currently maintained by brian d foy, C<< <bdfoy@cpan.org> >>
+Currently maintained by Christopher J. Madsen, C<< <perl@cjmweb.net> >>
 
 =head1 SEE ALSO
 
-Palm::PDB(3)
+L<Palm::PDB>
 
 =cut

@@ -1,19 +1,10 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 #
 # Dump a Palm PDB or PRC database.
-#
-# $Id: pdbdump,v 3.5 2002/04/10 00:58:28 arensb Exp $
 
 use strict;
 use Palm::PDB;
 use Palm::Raw;
-
-# Load handlers for the built-in apps by default
-use Palm::Memo;
-use Palm::Address;
-use Palm::Datebook;
-use Palm::Mail;
-use Palm::ToDo;
 
 use vars qw( $VERSION %PDBHandlers %PRCHandlers $hexdump );
 
