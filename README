@@ -20,12 +20,6 @@ To install this module, run the following commands:
 
 
 
-DEPENDENCIES
-
-{{ $t->dependency_list }}
-
-
-
 CHANGES
     Here's what's new in version {{$version}} of Palm-PDB:
     (See the file "Changes" for the full revision history.)
