@@ -7,7 +7,7 @@ BEGIN { use_ok('IO::File') }
 
 my $name = "t/Test.pdb";
 
-my $pdb = new Palm::Raw;
+my $pdb = Palm::Raw->new;
 ok( defined $pdb );
 $pdb->{name} = "Test";
 for( qw(tic tac toe) ) {
@@ -23,7 +23,7 @@ undef $pdb;
 my $fh = new IO::File $name, "r+";
 ok( defined $fh );
 
-$pdb = new Palm::PDB;
+$pdb = Palm::PDB->new;
 ok( defined $pdb );
 $pdb->Load( $fh );
 pass( "Load" );

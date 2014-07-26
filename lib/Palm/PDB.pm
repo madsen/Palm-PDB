@@ -38,7 +38,7 @@ $VERSION = '1.014';
     use Palm::PDB;
     use SomeHelperClass;
 
-    $pdb = new Palm::PDB;
+    $pdb = Palm::PDB->new;
     $pdb->Load("myfile.pdb");
 
     # Manipulate records in $pdb
@@ -92,7 +92,7 @@ use constant {
 
 =head2 new
 
-  $new = new Palm::PDB();
+  $new = Palm::PDB->new;
 
 Creates a new PDB. $new is a reference to an anonymous hash. Some of
 its elements have special significance. See L<Load()|/Load>.
@@ -1347,7 +1347,6 @@ sub Write
 =head2 new_Record
 
   $record = Palm::PDB->new_Record();
-  $record = new_Record Palm::PDB;
 
 Creates a new record, with the bare minimum needed:
 
@@ -1510,7 +1509,6 @@ sub _setUniqueID
 =head2 new_Resource
 
   $resource = Palm::PDB->new_Resource();
-  $resource = new_Resource Palm::PDB;
 
 Creates a new resource and initializes
 

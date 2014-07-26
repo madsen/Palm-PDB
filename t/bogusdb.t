@@ -21,7 +21,7 @@ use Palm::Raw;
 # of the test code):
 
 eval {
-	my $pdb = new Palm::PDB;
+	my $pdb = Palm::PDB->new;
 	$pdb->Load( 't/bogusdb.t' );
 };
 unless( $@ ) {
@@ -32,7 +32,7 @@ unless( $@ ) {
 
 eval {
 	# name doesn't have a NUL
-	my $pdb = new Palm::PDB;
+	my $pdb = Palm::PDB->new;
 	$pdb->Load( 't/bogus1DB.pdb' );
 };
 unless( $@ ) {
@@ -43,7 +43,7 @@ unless( $@ ) {
 
 eval {
 	# truncated after header
-	my $pdb = new Palm::PDB;
+	my $pdb = Palm::PDB->new;
 	$pdb->Load( 't/bogus2DB.pdb' );
 };
 unless( $@ ) {
