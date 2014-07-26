@@ -1,4 +1,4 @@
-1.014   NOT
+1.014   2014-07-26  Release by Christopher J. Madsen
 
 	- New maintainer Christopher J. Madsen
 	- Palm::PDB & Palm::Raw are now distributed separately from
