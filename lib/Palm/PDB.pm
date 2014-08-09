@@ -1850,18 +1850,6 @@ Database manipulation is still an arcane art.
 
 It may be possible to parse sort blocks further.
 
-=head1 SOURCE CONTROL
-
-The source is in GitHub:
-
-	{{ $meta{resources}{repository}{web} }}
-
-=head1 AUTHOR
-
-Alessandro Zummo, C<< <a.zummo@towertech.it> >>
-
-Currently maintained by Christopher J. Madsen, C<< <perl@cjmweb.net> >>
-
 =head1 SEE ALSO
 
 L<Palm::Raw>

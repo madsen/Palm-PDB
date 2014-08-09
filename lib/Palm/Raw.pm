@@ -22,8 +22,7 @@ use strict;
 use Palm::PDB;
 use vars qw( $VERSION @ISA );
 
-# One liner, to allow MakeMaker to work.
-$VERSION = '1.014';
+$VERSION = '1.015';
 # This file is part of {{$dist}} {{$dist_version}} ({{$date}})
 
 @ISA = qw( Palm::PDB );
@@ -181,18 +180,6 @@ sub PackResource
 
 1;
 __END__
-
-=head1 SOURCE CONTROL
-
-The source is in GitHub:
-
-	{{ $meta{resources}{repository}{web} }}
-
-=head1 AUTHOR
-
-Alessandro Zummo, C<< <a.zummo@towertech.it> >>
-
-Currently maintained by Christopher J. Madsen, C<< <perl@cjmweb.net> >>
 
 =head1 SEE ALSO
 
