@@ -6,10 +6,7 @@ use strict;
 use Palm::PDB;
 use Palm::Raw;
 
-use vars qw( $VERSION %PDBHandlers %PRCHandlers $hexdump );
-
-$VERSION = sprintf "%d.%03d_%03d_%03d",
-	'$Revision: 3.5 $ ' =~ m{(\d+)(?:\.(\d+))};
+use vars qw( %PDBHandlers %PRCHandlers $hexdump );
 
 *PDBHandlers = *Palm::PDB::PDBHandlers;
 *PRCHandlers = *Palm::PDB::PRCHandlers;
