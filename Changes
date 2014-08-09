@@ -1,4 +1,8 @@
-1.014   2014-07-26  Release by Christopher J. Madsen
+1.015  NOT
+
+	- Minor documentation improvements
+
+1.014  2014-07-26  Release by Christopher J. Madsen
 
 	- New maintainer Christopher J. Madsen
 	- Palm::PDB & Palm::Raw are now distributed separately from
@@ -7,7 +11,7 @@
 	  Palm-PDB is now distributed under the same terms as Perl 5
 	- Constant variables in Palm::PDB are now proper constants
 
-1.013   2013-08-21  Release by brian d foy <bdfoy@cpan.org>
+1.013  2013-08-21  Release by brian d foy <bdfoy@cpan.org>
 
 	- Add notice that this distribution is in need of a new maintainer
 
