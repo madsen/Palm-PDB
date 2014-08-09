@@ -70,7 +70,7 @@ individual chunks, then writes them to a file.
 
 =cut
 
-use constant {
+use constant 1.03 { # accepts hash reference
   dmRecordIDReservedRange => 1,		# The range of upper bits in the database's
 					# uniqueIDSeed from 0 to this number are
 					# reserved and not randomly picked when a
