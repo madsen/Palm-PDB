@@ -1100,7 +1100,7 @@ sub Write
 		}
 		# Figure out size of index
 		$index_len = RecIndexHeaderLen +
-			($#record_data + 1) * IndexRsrcLen;
+			@record_data * IndexRsrcLen;
 	} else {
 		my $record;
 
@@ -1153,7 +1153,7 @@ sub Write
 		push @record_data, @deleted_records;
 		# Figure out size of index
 		$index_len = RecIndexHeaderLen +
-			($#record_data + 1) * IndexRecLen;
+			@record_data * IndexRecLen;
 	}
 
 	my $header;
@@ -1235,7 +1235,7 @@ sub Write
 	# Write index header
 	my $index_header;
 
-	$index_header = pack "N n", 0, ($#record_data+1);
+	$index_header = pack "N n", 0, scalar @record_data;
 	print $handle "$index_header";
 
 	# Write index
@@ -1451,7 +1451,7 @@ sub append_Record
 {
 	my $self = shift;
 
-	if ($#_ < 0)
+	unless (@_)
 	{
 		# No arguments given. Create a new record.
 		my $record = $self->new_Record;
@@ -1558,7 +1558,7 @@ sub append_Resource
 {
 	my $self = shift;
 
-	if ($#_ < 0)
+	unless (@_)
 	{
 		# No arguments given. Create a new resource
 		my $resource = $self->new_Resource;
