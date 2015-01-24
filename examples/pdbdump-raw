@@ -2,11 +2,15 @@
 #
 # Dump a Palm PDB or PRC database.
 
+use 5.006;
 use strict;
 use Palm::PDB;
 use Palm::Raw;
 
-use vars qw( %PDBHandlers %PRCHandlers $hexdump );
+# VERSION
+# This file is part of {{$dist}} {{$dist_version}} ({{$date}})
+
+our ( %PDBHandlers, %PRCHandlers, $hexdump );
 
 *PDBHandlers = *Palm::PDB::PDBHandlers;
 *PRCHandlers = *Palm::PDB::PRCHandlers;
@@ -780,15 +784,11 @@ helper modules.
 
 =back
 
-=head1 BUGS
+=head1 BUGS AND LIMITATIONS
 
 C<pdbdump> only recognizes record databases (C<.pdb> files), not
 resource databases (C<.prc> files).
 
 =head1 SEE ALSO
 
-Palm::PDB(3)
-
-=head1 AUTHOR
-
-Andrew Arensburger <arensb@ooblick.com>
+L<Palm::PDB>

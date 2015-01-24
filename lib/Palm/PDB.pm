@@ -24,10 +24,10 @@ package Palm::PDB;
 # See http://www.palmos.com/dev/tech/docs/fileformats.zip
 # for details.
 
+use 5.006;
 use strict;
-use vars qw( $VERSION %PDBHandlers %PRCHandlers );
 
-$VERSION = '1.015';
+our $VERSION = '1.016';
 # This file is part of {{$dist}} {{$dist_version}} ({{$date}})
 
 # ABSTRACT: Parse Palm database files
@@ -86,8 +86,8 @@ use constant 1.03 { # accepts hash reference
   IndexRsrcLen => 10,			# Length of resource index entry
 };
 
-%PDBHandlers = ();			# Record handler map
-%PRCHandlers = ();			# Resource handler map
+our %PDBHandlers = ();			# Record handler map
+our %PRCHandlers = ();			# Resource handler map
 
 =head2 new
 

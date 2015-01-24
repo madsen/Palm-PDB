@@ -18,14 +18,14 @@ package Palm::Raw;
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See either the
 # GNU General Public License or the Artistic License for more details.
 
+use 5.006;
 use strict;
 use Palm::PDB;
-use vars qw( $VERSION @ISA );
 
-$VERSION = '1.015';
+# VERSION
 # This file is part of {{$dist}} {{$dist_version}} ({{$date}})
 
-@ISA = qw( Palm::PDB );
+our @ISA = qw( Palm::PDB );
 
 # ABSTRACT: Handler for "raw" Palm databases
 
