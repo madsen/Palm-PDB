@@ -1059,6 +1059,7 @@ sub Write
 	my $self = shift;
 	my $fname = shift;		# Output file name
 	my @record_data;
+	my @deleted_records;
 
 	die "Can't write a database with no name\n"
 		unless $self->{name} ne "";
@@ -1140,9 +1141,16 @@ sub Write
 			$id = $record->{id};
 
 			$data = $self->PackRecord($record);
+			if ($attributes & 0x80) {
+			    push @deleted_records, [ $attributes, $id, $data ];
+			}
+			else {
+			    push @record_data, [ $attributes, $id, $data ];
+			}
 
-			push @record_data, [ $attributes, $id, $data ];
 		}
+		# put deleted records at end (RT#101666)
+		push @record_data, @deleted_records;
 		# Figure out size of index
 		$index_len = RecIndexHeaderLen +
 			($#record_data + 1) * IndexRecLen;
