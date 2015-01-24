@@ -1,4 +1,6 @@
-1.016  NOT
+Revision history for Palm-PDB
+
+1.016  2015-01-24  Release by Christopher J. Madsen
 
 	- Move deleted records to end of file (Alan Wehmann - RT#101666)
 	- Use 'our' instead of 'use vars'
