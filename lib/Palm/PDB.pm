@@ -27,7 +27,7 @@ package Palm::PDB;
 use 5.006;
 use strict;
 
-our $VERSION = '1.016';
+our $VERSION = '1.400';
 # This file is part of {{$dist}} {{$dist_version}} ({{$date}})
 
 # ABSTRACT: Parse Palm database files

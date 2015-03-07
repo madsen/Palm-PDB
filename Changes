@@ -1,5 +1,12 @@
 Revision history for Palm-PDB
 
+1.400  NOT
+
+	- Bump version number to be greater than all previous releases.
+	  Palm::PDB 1.36 was released in p5-Palm 1.008, but p5-Palm 1.009
+	  contained Palm::PDB 1.009.  Version numbers shouldn't go backwards.
+	  (reported by David Cantrell - GitHub#1)
+
 1.016  2015-01-24  Release by Christopher J. Madsen
 
 	- Move deleted records to end of file (Alan Wehmann - RT#101666)
