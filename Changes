@@ -1,6 +1,6 @@
 Revision history for Palm-PDB
 
-1.400  NOT
+1.400  2015-03-07  Release by Christopher J. Madsen
 
 	- Bump version number to be greater than all previous releases.
 	  Palm::PDB 1.36 was released in p5-Palm 1.008, but p5-Palm 1.009
